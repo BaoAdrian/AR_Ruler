@@ -12,6 +12,8 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
+    var dotNodeArray = [SCNNode]()
+    
     @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
@@ -75,6 +77,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         )
         
         sceneView.scene.rootNode.addChildNode(dotNode)
+        
+        dotNodeArray.append(dotNode)
+        
+        if dotNodeArray.count >= 2 {
+            calculate()
+        }
+        
+    }
+    
+    // Calculate distance between two nodes
+    func calculate() {
+        let start = dotNodeArray[0]
+        let end = dotNodeArray[1]
+        
+        print(start.position)
+        print(end.position)
+        
+        // distance = √((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)
+        let distance = sqrt(
+            pow(end.position.x - start.position.x, 2) +
+            pow(end.position.y - start.position.y, 2) +
+            pow(end.position.z - start.position.z, 2)
+        )
+        
+        print(distance)
         
     }
     

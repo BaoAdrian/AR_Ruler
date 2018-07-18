@@ -11,8 +11,11 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
+    
+    let InchesInOneMeter : Float = 39.3701
 
     var dotNodeArray = [SCNNode]()
+    var textNode = SCNNode()
     
     @IBOutlet var sceneView: ARSCNView!
     
@@ -44,6 +47,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        // If user selects a third location, app removes the two previous dots and starts a new measurement
+        if dotNodeArray.count >= 2 {
+            for dot in dotNodeArray {
+                dot.removeFromParentNode()
+            }
+            dotNodeArray = [SCNNode]() // Reinitialize
+        }
+        
         if let touchLocation = touches.first?.location(in: sceneView) {
             let hitTestResults = sceneView.hitTest(touchLocation, types: .featurePoint)
             
@@ -56,6 +68,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         } else {
             // not valid touch exists
         }
+        
     }
     
     func addDot(at hitResult: ARHitTestResult) {
@@ -99,23 +112,32 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             pow(end.position.x - start.position.x, 2) +
             pow(end.position.y - start.position.y, 2) +
             pow(end.position.z - start.position.z, 2)
-        )
+        ) * InchesInOneMeter
         
-        updateText(text: "\(distance)", atPosition: end.position)
+        
+        updateText(text: "\(distance)" + " in.", atPosition: end.position)
         
     }
     
     func updateText(text: String, atPosition position: SCNVector3) {
         
+        // Clears any previous text
+        textNode.removeFromParentNode()
+        
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
         
         textGeometry.firstMaterial?.diffuse.contents = UIColor.blue
         
-        let textNode = SCNNode(geometry: textGeometry)
+        textNode = SCNNode(geometry: textGeometry)
         
         textNode.position = SCNVector3(x: position.x, y: position.y + 0.01, z: position.z)
         
         textNode.scale = SCNVector3(x: 0.005, y: 0.005, z: 0.005) // Scaling text down to 1% of original size
+        
+        // Orientation of text determined on position of camera
+        if let camera = sceneView.pointOfView {
+            textNode.orientation = camera.orientation
+        }
         
         sceneView.scene.rootNode.addChildNode(textNode)
         

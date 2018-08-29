@@ -7,7 +7,9 @@ Includes capability to measure more than two points and currently set to return 
 Developed using Swift 4 within Xcode 9.4.1. Completed as part of an assignment for a course utilizing basic
 tools within the ARKit framework and introductory concepts of AR environment manipulation and animation.
 
+
 </br>
+
 
 <h1>Future Enhancements:</h1>
 <ul>
@@ -19,6 +21,7 @@ tools within the ARKit framework and introductory concepts of AR environment man
 
 </br>
 
+
 <h1>Latest Adjustments:</h1>
 <ul>
   <li> 07/17/2018 - Integrated capability to measure multiple objects/ locations and updating UI </li>
@@ -27,5 +30,6 @@ tools within the ARKit framework and introductory concepts of AR environment man
 </ul>
 
 </br>
+
 
 

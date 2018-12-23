@@ -25,7 +25,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        //sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         
     }
     
@@ -108,12 +108,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //        print(end.position)
         
         // distance = √((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)
-        let distance = sqrt(
+        var distance = sqrt(
             pow(end.position.x - start.position.x, 2) +
             pow(end.position.y - start.position.y, 2) +
             pow(end.position.z - start.position.z, 2)
         ) * InchesInOneMeter
         
+        // Round the decimal
+        distance = round(distance*1000)/1000
         
         updateText(text: "\(distance)" + " in.", atPosition: end.position)
         

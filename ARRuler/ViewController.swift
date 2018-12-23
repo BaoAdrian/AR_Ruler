@@ -117,6 +117,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Round the decimal
         distance = round(distance*1000)/1000
         
+        
         updateText(text: "\(distance)" + " in.", atPosition: end.position)
         
     }

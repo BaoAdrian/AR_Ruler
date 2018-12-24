@@ -8,12 +8,7 @@ Developed using Swift 4 within Xcode 9.4.1. Completed as part of an assignment f
 tools within the ARKit framework and introductory concepts of AR environment manipulation and animation.
 
 
-<video controls width="250">
 
-    <source src="Demo_Files/ARRuler_PageWidth_Demo.mp4"
-            type="video/mp4">
-
-</video>
 
 </br>
 

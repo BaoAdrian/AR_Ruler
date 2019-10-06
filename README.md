@@ -7,8 +7,6 @@ Includes capability to measure more than two points and currently set to return 
 Developed using Swift 4 within Xcode 9.4.1. Completed as part of an assignment for a course utilizing basic
 tools within the ARKit framework and introductory concepts of AR environment manipulation and animation.
 
-<img align="middle" src="./assets/fpga-demo.gif" height="50%" width="50%"> </img>
-
 # Future Enhancements
 - [ ] Create a settings tab to include items such as: units, number of selected locations, etc...  
 - [ ] Allow user to select unit of measurement.
